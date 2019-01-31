@@ -1,5 +1,8 @@
 ##Keep Duplicate
 awk 'BEGIN{FS=OFS="\t"} {if ($2==1024) $2=0} {if ($2==1040) $2=0}1' /Users/xsw/bio/scRNA/data/2/mutation_call/AAACCTGAGAAGGTGA > AAACCTGAGAAGGTGA_non10241040
+#make bam file
+add header
+samtools view -b
 
 ##call variations from one cell
 samtools mpileup -uf /Users/xsw/bio/database/hg38/10X/genome.fa AAACCTGAGAAGGTGA-1_sort.bam \
