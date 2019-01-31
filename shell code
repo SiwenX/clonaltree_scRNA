@@ -1,3 +1,6 @@
+##Keep Duplicate
+awk 'BEGIN{FS=OFS="\t"} {if ($2==1024) $2=0} {if ($2==1040) $2=0}1' /Users/xsw/bio/scRNA/data/2/mutation_call/AAACCTGAGAAGGTGA > AAACCTGAGAAGGTGA_non10241040
+
 ##call variations from one cell
 samtools mpileup -uf /Users/xsw/bio/database/hg38/10X/genome.fa AAACCTGAGAAGGTGA-1_sort.bam \
 | bcftools call -mv -> AAACCTGAGAAGGTGA-1.vcf
@@ -6,3 +9,5 @@ samtools mpileup -uf /Users/xsw/bio/database/hg38/10X/genome.fa AAACCTGAGAAGGTGA
 ##
 samtools view /Users/xsw/bio/scRNA/data/2/mutation_call/AAACCTGAGAAGGTGA-1.sort.bam 12:6537943-6537943 \
 | awk '{print $2 "\t" $3 "\t" $4 "\t" $6 "\t" $10 "\t" $(NF-1)}' > fragments.bed
+
+
