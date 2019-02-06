@@ -1,0 +1,21 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=8
+#PBS -l walltime=100:00:00
+#PBS -l vmem=32gb
+#PBS -M siwxu@iu.edu
+#PBS -m abe
+
+module load samtools/1.9
+
+n=0
+cat /N/dc2/projects/ngs/users/siwxu/projects/scRNA/data/Cells2/barcodes64.tsv | while read line
+do
+line_arr=( $line )
+id=${line_arr[0]}
+grep "$id" /N/dc2/projects/ngs/users/siwxu/projects/myeloma/2/possorted_genome_bam.sam > /N/dc2/projects/ngs/users/siwxu/projects/scRNA/data/Cells2/$id
+((n=n+1))
+echo $n
+echo $id
+done
+
+
