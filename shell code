@@ -7,12 +7,21 @@ samtools sort
 samtools index
 
 ##call variations from one cell
-samtools mpileup -uf /Users/xsw/bio/database/hg38/10X/genome.fa AAACCTGAGAAGGTGA-1_sort.bam \
-| bcftools call -mv -> AAACCTGAGAAGGTGA-1.vcf
+ssamtools mpileup --ff UNMAP,SECONDARY,QCFAIL -uf /Users/xsw/bio/database/hg38/10X/genome.fa /Users/xsw/bio/scRNA/data/2/mutation_call/AAACCTGAGAAGGTGA-1.sort.bam | bcftools call -mv -> AAACCTGAGAAGGTGA-1_ff.vcf
 #
 vcffilter -f "DP > 10" AATCCAGTCGTCTGCT.vcf > AATCCAGTCGTCTGCT_DP10.vcf
 ##
 samtools view /Users/xsw/bio/scRNA/data/2/mutation_call/AAACCTGAGAAGGTGA-1.sort.bam 12:6537943-6537943 \
 | awk '{print $2 "\t" $3 "\t" $4 "\t" $6 "\t" $10 "\t" $(NF-1)}' > fragments.bed
 
-
+##1.Pick up sequencing data from whole sam file of single cell  
+grep "$id" /N/dc2/projects/ngs/users/siwxu/projects/myeloma/2/possorted_genome_bam.sam > /N/dc2/projects/ngs/users/siwxu/projects/scRNA/data/Cells2/$id
+##2.Add header and generate bam file
+samtools view -b
+samtools sort
+samtools index
+##3.Call variations from one cell
+samtools mpileup --ff UNMAP,SECONDARY,QCFAIL -uf /Users/xsw/bio/database/hg38/10X/genome.fa /Users/xsw/bio/scRNA/data/2/mutation_call/AAACCTGAGAAGGTGA-1.sort.bam | bcftools call -mv -> AAACCTGAGAAGGTGA-1_ff.vcf
+#
+vcffilter -f "DP > 10" AATCCAGTCGTCTGCT.vcf > AATCCAGTCGTCTGCT_DP10.vcf
+grep -v "INDEL" AATCCAGTCGTCTGCT_DP10.vcf > AATCCAGTCGTCTGCT_DP10_Noindel.vcf
