@@ -7,7 +7,7 @@ samtools sort
 samtools index
 
 ##call variations from one cell
-ssamtools mpileup --ff UNMAP,SECONDARY,QCFAIL -uf /Users/xsw/bio/database/hg38/10X/genome.fa /Users/xsw/bio/scRNA/data/2/mutation_call/AAACCTGAGAAGGTGA-1.sort.bam | bcftools call -mv -> AAACCTGAGAAGGTGA-1_ff.vcf
+samtools mpileup --ff UNMAP,SECONDARY,QCFAIL -uf /Users/xsw/bio/database/hg38/10X/genome.fa /Users/xsw/bio/scRNA/data/2/mutation_call/AAACCTGAGAAGGTGA-1.sort.bam | bcftools call -mv -> AAACCTGAGAAGGTGA-1_ff.vcf
 #
 vcffilter -f "DP > 10" AATCCAGTCGTCTGCT.vcf > AATCCAGTCGTCTGCT_DP10.vcf
 ##
@@ -25,3 +25,9 @@ samtools mpileup --ff UNMAP,SECONDARY,QCFAIL -uf /Users/xsw/bio/database/hg38/10
 #
 vcffilter -f "DP > 10" AATCCAGTCGTCTGCT.vcf > AATCCAGTCGTCTGCT_DP10.vcf
 grep -v "INDEL" AATCCAGTCGTCTGCT_DP10.vcf > AATCCAGTCGTCTGCT_DP10_Noindel.vcf
+#
+samtools mpileup -r 1:23691742-23696835 --ff UNMAP,SECONDARY,QCFAIL -uvf /Users/xsw/bio/database/hg38/10X/genome.fa -t DP,AD \
+/Users/xsw/bio/scRNA/data/2/AGTGTCAGTAGTGAAT/AGTGTCAGTAGTGAAT.sort.bam > /Users/xsw/bio/scRNA/data/2/AGTGTCAGTAGTGAAT/AGTGTCAGTAGTGAAT_pileup.vcf
+
+vcftools --vcf /Users/xsw/bio/scRNA/data/2/AGTGTCAGTAGTGAAT/AGTGTCAGTAGTGAAT_pileup.vcf --min-alleles 3 \
+--recode --out /Users/xsw/bio/scRNA/data/2/AGTGTCAGTAGTGAAT/AGTGTCAGTAGTGAAT_mutiallele
