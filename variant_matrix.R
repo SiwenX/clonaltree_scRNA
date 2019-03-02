@@ -24,7 +24,7 @@ for(i in 1:100){
     gene_leng[which(colnames(variant_matrix)==temp2[1])]<-1
   }
 
-  row.names(variant_matrix)<-as.character(arg[1])
+  rownames(variant_matrix)[i]<-as.character(arg[1])
   cat(gene_leng, file = paste('/Users/xsw/bio/scRNA/data/2/6166cell/vcf/',GeneName,'_variant_matrix.txt',sep = ''), append = TRUE)
   cat("\n", file = paste('/Users/xsw/bio/scRNA/data/2/6166cell/vcf/',GeneName,'_variant_matrix.txt',sep = ''), append = TRUE)
 }
