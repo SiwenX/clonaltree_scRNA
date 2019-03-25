@@ -48,6 +48,7 @@ write.table(ROW,"/Users/xsw/bio/Multiple_myeloma/data/scRNA/2/rowname.txt",quote
 write.table(COL,"/Users/xsw/bio/Multiple_myeloma/data/scRNA/2/colname.txt",quote=FALSE,row.names=FALSE,col.names=FALSE)
 csv3[count10,]->csv4
 rownames(csv4)->ROW; t(colnames(csv4))->COL;
+#genes in csv4 are the marker-gene
 write.table(csv4,"/Users/xsw/bio/Multiple_myeloma/data/scRNA/2/90%cellsUMI10.csv",quote=FALSE,row.names=FALSE,col.names=FALSE)
 write.table(ROW,"/Users/xsw/bio/Multiple_myeloma/data/scRNA/2/rowname.txt",quote=FALSE,row.names=FALSE,col.names=FALSE)
 write.table(COL,"/Users/xsw/bio/Multiple_myeloma/data/scRNA/2/colname.txt",quote=FALSE,row.names=FALSE,col.names=FALSE)
