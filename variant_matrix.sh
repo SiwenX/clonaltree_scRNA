@@ -10,7 +10,7 @@ module load vcftools/gnu/0.1.13
 module load r/3.3.1
 
 n=0
-sed -n '2825,$p' /N/dc2/projects/ngs/users/siwxu/projects/scRNA/data/Cell3/barcodes.tsv | while read line
+cat /N/dc2/projects/ngs/users/siwxu/projects/scRNA/data/Cell3/barcodes.tsv | while read line
 do
 line_arr=( $line )
 cell=${line_arr[0]}
