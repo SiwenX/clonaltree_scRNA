@@ -1,0 +1,9 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=16gb
+#PBS -M siwxu@iu.edu
+#PBS -m abe
+#PBS -l walltime=48:00:00
+
+module load freebayes/1.2.0
+/N/dc2/projects/ngs/users/siwxu/tool/freebayes/scripts/freebayes-parallel <(/N/dc2/projects/ngs/users/siwxu/tool/freebayes/scripts/fasta_generate_regions.py /N/dc2/projects/ngs/users/siwxu/database/10X/genome.fa.fai 100000) 16 freebayes -f /N/dc2/projects/ngs/users/siwxu/database/10X/genome.fa -C 200 -i -u -X /N/dc2/projects/ngs/projects/iucmg/10X_singleCell/Nova_S2_008/Analysis/0661-2_CD138Plus/outs/possorted_genome_bam.bam > /N/dc2/projects/ngs/users/siwxu/projects/scRNA/data/2/CD138plus/SNP2.vcf
