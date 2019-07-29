@@ -5,8 +5,15 @@
 #PBS -m abe
 #PBS -l walltime=48:00:00
 
-module load freebayes/1.2.0
-freebayes -f /N/dc2/projects/ngs/users/siwxu/database/10X/genome.fa -C 200 -q 20 -iXu -m 30 \
---pooled-continuous --min-alternate-fraction 0.01 -r 1 \
-/N/dc2/projects/ngs/projects/iucmg/10X_singleCell/Nova_S2_008/Analysis/0661-5_CD138Plus/outs/possorted_genome_bam.bam \
-> /N/dc2/projects/ngs/users/siwxu/projects/scRNA/data/5/CD138plus/SNP_MAF001_chr1.vcf
+cd /N/dc2/projects/ngs/users/siwxu/tool/freebayes/scripts/
+
+
+echo $id $CD138
+#mkdir /N/dc2/projects/ngs/users/siwxu/projects/scRNA/data/$id/CD138$CD138
+
+./freebayes-parallel <(./fasta_generate_regions.py /N/dc2/projects/ngs/users/siwxu/database/10X/genome.fa.fai 100000) 96 \
+-f /N/dc2/projects/ngs/users/siwxu/database/10X/genome.fa -C 200 -q 20 -m 30 -i -X -u --pooled-continuous \
+--min-alternate-fraction 0.01 /N/dc2/projects/ngs/projects/iucmg/10X_singleCell/Nova_S2_008/Analysis/0661-$id'_CD138'$CD138/outs/possorted_genome_bam.bam \
+> /N/dc2/projects/ngs/users/siwxu/projects/scRNA/data/$id/CD138$CD138/SNP_freebayes_patient$id'_0728'.vcf
+
+vcffilter -f 'QUAL > 20' SNP_freebayes_patient2_0728.vcf > SNP_freebayes_patient2_QUAL20_0728.vcf
