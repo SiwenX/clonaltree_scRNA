@@ -7,8 +7,6 @@ This project helps us to call variants from single cell exactly, then we use the
 
 
 # vatrix
-'''
-./vartrix --scoring-method coverage --umi --threads 8 --bam /home/siwxu/bio/clonalTree/data/4/possorted_genome_bam.bam \
+'./vartrix --scoring-method coverage --umi --threads 8 --bam /home/siwxu/bio/clonalTree/data/4/possorted_genome_bam.bam \
 --cell-barcodes /home/siwxu/bio/clonalTree/data/4/barcodes.tsv --fasta /home/siwxu/database/10X/genome.fa --out-matrix \
-/home/siwxu/bio/clonalTree/data/4/out_matrix_umi --vcf /home/siwxu/bio/clonalTree/data/4/SNP_freebayes_patient4_QUAL20_0728.vcf
-'''
+/home/siwxu/bio/clonalTree/data/4/out_matrix_umi --vcf /home/siwxu/bio/clonalTree/data/4/SNP_freebayes_patient4_QUAL20_0728.vcf'
